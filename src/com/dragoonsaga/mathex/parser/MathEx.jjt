@@ -1,0 +1,152 @@
+/**
+* JJTree file
+*/
+
+options {
+  MULTI=true;
+  VISITOR=true;
+  NODE_DEFAULT_VOID=true;
+  LOOKAHEAD=1;
+  FORCE_LA_CHECK=false;
+  STATIC=false;
+//  TRACK_TOKENS=true;
+}
+ 
+PARSER_BEGIN(MathExParser) 
+package com.dragoonsaga.mathex.parser;
+
+public class MathExParser {
+}
+
+PARSER_END(MathExParser)
+
+SKIP :
+{
+  < WS : ( ["\t", " "] )+ >
+| < LB : ( ["\n","\r"] )+ >
+| <"//" (~["\n","\r"])* ("\n"|"\r"|"\r\n")>
+| <"/*" (~["*"])* "*" (~["/"] (~["*"])* "*")* "/">
+}
+TOKEN : /* Reserved */
+{
+	< lparen : "(" >
+|	< rparen : ")" >
+|   < eq  : "==" >
+|   < ne  : "!=" >
+}
+TOKEN : /* LITERALS */
+{
+  < INTEGER_LITERAL:
+        <DECIMAL_LITERAL> (["l","L"])?
+      | <HEX_LITERAL> (["l","L"])?
+      | <OCTAL_LITERAL> (["l","L"])?
+  >
+|  < #DECIMAL_LITERAL: ["1"-"9"] (["0"-"9"])* >
+|  < #HEX_LITERAL: "0" ["x","X"] (["0"-"9","a"-"f","A"-"F"])+ >
+|  < #OCTAL_LITERAL: "0" (["0"-"7"])* >
+}
+TOKEN :
+{
+	< dot : "\\." >
+}
+TOKEN : /* IDENTIFIERS */
+{
+  < IDENTIFIER: (<LETTER>|<DIGIT>)+ >
+|  < #LETTER: ["a"-"z","A"-"Z"] >
+|  < #DIGIT: ["0"-"9"] >
+}
+
+ASTStart Start() #Start :{}
+{
+	AdditiveExpression()
+	{
+	  	return jjtThis; 
+	}	
+}
+
+void AdditiveExpression() #Add:{}
+{
+	SubtractiveExpression() 
+	( 
+  		"+" SubtractiveExpression()
+	)*
+}
+
+void SubtractiveExpression() #Sub:{}
+{
+	MultiplicitaveExpression() 
+	(
+  		"-" MultiplicitaveExpression()
+	)*
+}
+
+void MultiplicitaveExpression() #Mul:{}
+{
+	DivideExpression() 
+	( 
+  		"*" DivideExpression()
+	)*
+}
+
+void DivideExpression() #Div:{}
+{
+	ExponentialExpression() 
+	( 
+  		"/" ExponentialExpression()
+	)*
+}
+
+
+void ExponentialExpression() #Exp:{}
+{
+	UnaryExpression() 
+	( 
+  		"^" UnaryExpression()
+	)*
+}
+
+void UnaryExpression():{}
+{
+  Value()
+  | <lparen> AdditiveExpression() <rparen>
+}
+
+void Value():{}
+{
+  Constant()
+  | ("-" Constant()) 
+  { 
+	ASTConstant integer=((ASTConstant)jjtree.peekNode());
+	integer.setValue(Float.toString(integer.getValue()*-1));
+  }
+  | Variable()
+}
+
+void Constant() #Constant:
+{
+	Token t1; 
+	Token t2; 
+}
+{
+  t1=<INTEGER_LITERAL>
+  {
+  	jjtThis.setValue(t1.image);
+  }
+  (
+  	<dot> t2=<INTEGER_LITERAL>
+  	{
+	  	jjtThis.setValue(t1.image +"." +t2.image);
+  	}
+  )?
+}
+
+void Variable() #Variable : 
+{
+	Token t;
+}
+{
+	t=<IDENTIFIER>
+	{
+		jjtThis.setName(t.image);
+	}
+}
