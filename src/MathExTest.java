@@ -1,4 +1,5 @@
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.dragoonsaga.mathex.Func;
@@ -49,6 +50,7 @@ public class MathExTest
 		Assert.assertEquals(4, f.value(), 0.0001f);
 	}
 	
+	@Ignore
 	@Test public void derivitavePrintTest() throws ParseException
 	{
 		Func f = new Func("a*x^3+b*x^2+c*x+d");
