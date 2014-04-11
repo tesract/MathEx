@@ -9,3 +9,4 @@ test:
 
 jar: all
 	(cd bin; find . -name "*.class" | grep -vi test | xargs jar cf ../MathEx.jar )
+	jar uf MathEx.jar README.md LICENCE

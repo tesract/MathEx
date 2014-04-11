@@ -9,6 +9,17 @@ MathEx defines mathematical expression language using JJTree (https://javacc.jav
 
 Probably the best introduction is to look at https://github.com/tesract/MathEx/blob/master/src/MathExTest.java  which has several tests which also serve as examples.
 
+Building
+--------
+
+To build from source run these commands:
+
+	git clone http://github.com/tesract/MathEx
+	cd MathEx
+	make jar
+
+After that you should have a MathEx.jar file sitting in the MathEx folder which is ready to use.
+
 Example
 -------
 
@@ -32,4 +43,5 @@ Finish the DeriveVisitor implementation so it can handle polynomial expressions 
 
 Add functionality to find the zero's of a function.
 
+Switch to ant based build.
 
