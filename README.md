@@ -12,7 +12,8 @@ Probably the best introduction is to look at https://github.com/tesract/MathEx/b
 Example
 -------
 
-Func f = new Func("a*x^3+b*x^2+c*x+d");
+```java
+		Func f = new Func("a*x^3+b*x^2+c*x+d");
 
 		f.set("a", 1);
 		f.set("b", 1);
@@ -21,7 +22,8 @@ Func f = new Func("a*x^3+b*x^2+c*x+d");
 
 		f.set("x", 1);
 
-		Assert.assertEquals(4, f.value(), 0.0001f);
+		Assert.assertEquals(4, f.value(), 0.0001f); //0.0001f allowable error
+```
 
 Future Plans
 ------------
