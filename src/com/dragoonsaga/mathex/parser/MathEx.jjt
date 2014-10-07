@@ -86,12 +86,6 @@ void MultiplicitaveExpression() #Mul:{}
 	( 
   		"*" DivideExpression()
 	)*
-	|
-	"-" NegativeExpression()
-}
-
-void NegativeExpression() #Neg:{}
-{	DivideExpression()
 }
 
 void DivideExpression() #Div:{}
@@ -115,7 +109,14 @@ void UnaryExpression():{}
 {
   Value()
   | <lparen> AdditiveExpression() <rparen>
+  | "-" NegativeExpression()
 }
+
+void NegativeExpression() #Neg:{}
+{
+	AdditiveExpression()
+}
+
 
 void Value():{}
 {

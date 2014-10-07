@@ -3,6 +3,8 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import com.dragoonsaga.mathex.Func;
+import com.dragoonsaga.mathex.PrintVisitor;
+import com.dragoonsaga.mathex.ReversePolishVisitor;
 import com.dragoonsaga.mathex.parser.ParseException;
 
 
@@ -54,7 +56,21 @@ public class MathExTest
 	{
 		Func f = new Func("-(x)");
 		
-		System.out.println(f.toString());
+		Assert.assertEquals("-x", f.toString());
+	}
+	
+	@Test public void testNegativeConstant() throws ParseException
+	{
+		Func f = new Func("-5");
+		
+		Assert.assertEquals(-5, f.value(), 0.0001f);
+	}
+	
+	@Test public void testNegativeMulti() throws ParseException
+	{
+		Func f = new Func("x*-1");
+		
+		Assert.assertEquals("x*-1", f.toString());
 	}
 	
 	@Ignore
@@ -87,6 +103,8 @@ public class MathExTest
 		Func f = new Func("a*x+b");
 		
 		Func ff = f.derive("x");
+		
+		System.out.println(ff._root.jjtAccept(new ReversePolishVisitor(), this));
 		
 		ff.set("a", 1);
 		ff.set("b", 1);

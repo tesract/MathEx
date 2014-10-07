@@ -124,62 +124,20 @@ public class MathExParser/*@bgen(jjtree)*/implements MathExParserTreeConstants, 
   boolean jjtc000 = true;
   jjtree.openNodeScope(jjtn000);
     try {
-      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case lparen:
-      case INTEGER_LITERAL:
-      case IDENTIFIER:
-        DivideExpression();
-        label_3:
-        while (true) {
-          switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-          case 19:
-            ;
-            break;
-          default:
-            jj_la1[2] = jj_gen;
-            break label_3;
-          }
-          jj_consume_token(19);
-          DivideExpression();
-        }
-        break;
-      case 18:
-        jj_consume_token(18);
-        NegativeExpression();
-        break;
-      default:
-        jj_la1[3] = jj_gen;
-        jj_consume_token(-1);
-        throw new ParseException();
-      }
-    } catch (Throwable jjte000) {
-          if (jjtc000) {
-            jjtree.clearNodeScope(jjtn000);
-            jjtc000 = false;
-          } else {
-            jjtree.popNode();
-          }
-          if (jjte000 instanceof RuntimeException) {
-            {if (true) throw (RuntimeException)jjte000;}
-          }
-          if (jjte000 instanceof ParseException) {
-            {if (true) throw (ParseException)jjte000;}
-          }
-          {if (true) throw (Error)jjte000;}
-    } finally {
-          if (jjtc000) {
-            jjtree.closeNodeScope(jjtn000, true);
-          }
-    }
-  }
-
-  final public void NegativeExpression() throws ParseException {
-                                /*@bgen(jjtree) Neg */
-  ASTNeg jjtn000 = new ASTNeg(JJTNEG);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-    try {
       DivideExpression();
+      label_3:
+      while (true) {
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case 19:
+          ;
+          break;
+        default:
+          jj_la1[2] = jj_gen;
+          break label_3;
+        }
+        jj_consume_token(19);
+        DivideExpression();
+      }
     } catch (Throwable jjte000) {
           if (jjtc000) {
             jjtree.clearNodeScope(jjtn000);
@@ -215,7 +173,7 @@ public class MathExParser/*@bgen(jjtree)*/implements MathExParserTreeConstants, 
           ;
           break;
         default:
-          jj_la1[4] = jj_gen;
+          jj_la1[3] = jj_gen;
           break label_4;
         }
         jj_consume_token(20);
@@ -256,7 +214,7 @@ public class MathExParser/*@bgen(jjtree)*/implements MathExParserTreeConstants, 
           ;
           break;
         default:
-          jj_la1[5] = jj_gen;
+          jj_la1[4] = jj_gen;
           break label_5;
         }
         jj_consume_token(21);
@@ -294,10 +252,42 @@ public class MathExParser/*@bgen(jjtree)*/implements MathExParserTreeConstants, 
       AdditiveExpression();
       jj_consume_token(rparen);
       break;
+    case 18:
+      jj_consume_token(18);
+      NegativeExpression();
+      break;
     default:
-      jj_la1[6] = jj_gen;
+      jj_la1[5] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
+    }
+  }
+
+  final public void NegativeExpression() throws ParseException {
+                                /*@bgen(jjtree) Neg */
+  ASTNeg jjtn000 = new ASTNeg(JJTNEG);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+    try {
+      AdditiveExpression();
+    } catch (Throwable jjte000) {
+          if (jjtc000) {
+            jjtree.clearNodeScope(jjtn000);
+            jjtc000 = false;
+          } else {
+            jjtree.popNode();
+          }
+          if (jjte000 instanceof RuntimeException) {
+            {if (true) throw (RuntimeException)jjte000;}
+          }
+          if (jjte000 instanceof ParseException) {
+            {if (true) throw (ParseException)jjte000;}
+          }
+          {if (true) throw (Error)jjte000;}
+    } finally {
+          if (jjtc000) {
+            jjtree.closeNodeScope(jjtn000, true);
+          }
     }
   }
 
@@ -310,7 +300,7 @@ public class MathExParser/*@bgen(jjtree)*/implements MathExParserTreeConstants, 
       Variable();
       break;
     default:
-      jj_la1[7] = jj_gen;
+      jj_la1[6] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -332,7 +322,7 @@ public class MathExParser/*@bgen(jjtree)*/implements MathExParserTreeConstants, 
                 jjtn000.setValue(t1.image +"." +t2.image);
         break;
       default:
-        jj_la1[8] = jj_gen;
+        jj_la1[7] = jj_gen;
         ;
       }
     } finally {
@@ -368,13 +358,13 @@ public class MathExParser/*@bgen(jjtree)*/implements MathExParserTreeConstants, 
   public Token jj_nt;
   private int jj_ntk;
   private int jj_gen;
-  final private int[] jj_la1 = new int[9];
+  final private int[] jj_la1 = new int[8];
   static private int[] jj_la1_0;
   static {
       jj_la1_init_0();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x20000,0x40000,0x80000,0x44220,0x100000,0x200000,0x4220,0x4200,0x2000,};
+      jj_la1_0 = new int[] {0x20000,0x40000,0x80000,0x100000,0x200000,0x44220,0x4200,0x2000,};
    }
 
   /** Constructor with InputStream. */
@@ -388,7 +378,7 @@ public class MathExParser/*@bgen(jjtree)*/implements MathExParserTreeConstants, 
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 9; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 8; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -403,7 +393,7 @@ public class MathExParser/*@bgen(jjtree)*/implements MathExParserTreeConstants, 
     jj_ntk = -1;
     jjtree.reset();
     jj_gen = 0;
-    for (int i = 0; i < 9; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 8; i++) jj_la1[i] = -1;
   }
 
   /** Constructor. */
@@ -413,7 +403,7 @@ public class MathExParser/*@bgen(jjtree)*/implements MathExParserTreeConstants, 
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 9; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 8; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -424,7 +414,7 @@ public class MathExParser/*@bgen(jjtree)*/implements MathExParserTreeConstants, 
     jj_ntk = -1;
     jjtree.reset();
     jj_gen = 0;
-    for (int i = 0; i < 9; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 8; i++) jj_la1[i] = -1;
   }
 
   /** Constructor with generated Token Manager. */
@@ -433,7 +423,7 @@ public class MathExParser/*@bgen(jjtree)*/implements MathExParserTreeConstants, 
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 9; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 8; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -443,7 +433,7 @@ public class MathExParser/*@bgen(jjtree)*/implements MathExParserTreeConstants, 
     jj_ntk = -1;
     jjtree.reset();
     jj_gen = 0;
-    for (int i = 0; i < 9; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 8; i++) jj_la1[i] = -1;
   }
 
   private Token jj_consume_token(int kind) throws ParseException {
@@ -499,7 +489,7 @@ public class MathExParser/*@bgen(jjtree)*/implements MathExParserTreeConstants, 
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
-    for (int i = 0; i < 9; i++) {
+    for (int i = 0; i < 8; i++) {
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
           if ((jj_la1_0[i] & (1<<j)) != 0) {

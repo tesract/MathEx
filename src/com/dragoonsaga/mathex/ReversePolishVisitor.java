@@ -111,12 +111,12 @@ public class ReversePolishVisitor implements MathExParserVisitor
 	
 	public Object visit(DerivitaveNode dn, Object data)
 	{
-		return "D["+(String)visit((SimpleNode)dn.jjtGetChild(0), data)+","+(String)data+"]";
+		return "D["+(String)dn.jjtGetChild(0).jjtAccept(this, data)+","+dn._var+"]";
 	}
 
 	@Override
 	public Object visit(SimpleNode node, Object data)
 	{
-		return null;
+		throw new Error(node.getClass().toString());
 	}
 }

@@ -6,7 +6,7 @@ import com.dragoonsaga.mathex.parser.*;
 
 public class Func
 {
-	ASTStart _root;
+	public ASTStart _root;
 	
 	HashMap<String, Float> _values=new HashMap<String, Float>();
 	

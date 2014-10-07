@@ -8,11 +8,11 @@ public interface MathExParserVisitor
   public Object visit(ASTAdd node, Object data);
   public Object visit(ASTSub node, Object data);
   public Object visit(ASTMul node, Object data);
-  public Object visit(ASTNeg node, Object data);
   public Object visit(ASTDiv node, Object data);
   public Object visit(ASTExp node, Object data);
+  public Object visit(ASTNeg node, Object data);
   public Object visit(ASTConstant node, Object data);
   public Object visit(ASTVariable node, Object data);
   public Object visit(DerivitaveNode node, Object data);
 }
-/* JavaCC - OriginalChecksum=e96a37b84db4901d4cfcb912b2562354 (do not edit this line) */
+/* JavaCC - OriginalChecksum=aca7e6acfaf4e0cd4f5cd5c1cb32052d (do not edit this line) */
