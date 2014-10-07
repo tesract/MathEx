@@ -178,7 +178,39 @@ void MultiplicitaveExpression()     :{/*@bgen(jjtree) Mul */
 	DivideExpression() 
 	( 
   		"*" DivideExpression()
-	)*/*@bgen(jjtree)*/
+	)*
+	|
+	"-" NegativeExpression()/*@bgen(jjtree)*/
+        } catch (Throwable jjte000) {
+          if (jjtc000) {
+            jjtree.clearNodeScope(jjtn000);
+            jjtc000 = false;
+          } else {
+            jjtree.popNode();
+          }
+          if (jjte000 instanceof RuntimeException) {
+            throw (RuntimeException)jjte000;
+          }
+          if (jjte000 instanceof ParseException) {
+            throw (ParseException)jjte000;
+          }
+          throw (Error)jjte000;
+        } finally {
+          if (jjtc000) {
+            jjtree.closeNodeScope(jjtn000, true);
+          }
+        }
+/*@egen*/
+}
+
+void NegativeExpression()     :{/*@bgen(jjtree) Neg */
+  ASTNeg jjtn000 = new ASTNeg(JJTNEG);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+/*@egen*/}
+{/*@bgen(jjtree) Neg */
+        try {
+/*@egen*/	DivideExpression()/*@bgen(jjtree)*/
         } catch (Throwable jjte000) {
           if (jjtc000) {
             jjtree.clearNodeScope(jjtn000);
@@ -279,11 +311,6 @@ void UnaryExpression():{}
 void Value():{}
 {
   Constant()
-  | ("-" Constant()) 
-  { 
-	ASTConstant integer=((ASTConstant)jjtree.peekNode());
-	integer.setValue(Float.toString(integer.getValue()*-1));
-  }
   | Variable()
 }
 

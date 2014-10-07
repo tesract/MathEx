@@ -53,6 +53,20 @@ public class DeriveVisitor implements MathExParserVisitor
 	}
 	
 	@Override
+	public Object visit(ASTNeg node, Object data) 
+	{
+		ASTNeg val1 = (ASTNeg)accept(node, new ASTNeg(0), (String)data);
+		
+		Node child = val1.jjtGetChild(0);
+		if (child instanceof ASTConstant)
+		{
+			return -((ASTConstant)child).getValue();			
+		}
+		else
+			return val1;
+	}
+	
+	@Override
 	public Object visit(ASTMul node, Object data)
 	{
 		ASTMul val1 = (ASTMul)accept(node, new ASTMul(0), (String)data);

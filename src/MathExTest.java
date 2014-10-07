@@ -50,6 +50,13 @@ public class MathExTest
 		Assert.assertEquals(4, f.value(), 0.0001f);
 	}
 	
+	@Test public void testNegativeParen() throws ParseException
+	{
+		Func f = new Func("-(x)");
+		
+		System.out.println(f.toString());
+	}
+	
 	@Ignore
 	@Test public void derivitavePrintTest() throws ParseException
 	{

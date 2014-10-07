@@ -86,6 +86,12 @@ void MultiplicitaveExpression() #Mul:{}
 	( 
   		"*" DivideExpression()
 	)*
+	|
+	"-" NegativeExpression()
+}
+
+void NegativeExpression() #Neg:{}
+{	DivideExpression()
 }
 
 void DivideExpression() #Div:{}
@@ -114,11 +120,6 @@ void UnaryExpression():{}
 void Value():{}
 {
   Constant()
-  | ("-" Constant()) 
-  { 
-	ASTConstant integer=((ASTConstant)jjtree.peekNode());
-	integer.setValue(Float.toString(integer.getValue()*-1));
-  }
   | Variable()
 }
 

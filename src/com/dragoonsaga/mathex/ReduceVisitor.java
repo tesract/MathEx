@@ -56,6 +56,22 @@ public class ReduceVisitor implements MathExParserVisitor
 	}
 	
 	@Override
+	public Object visit(ASTNeg node, Object data) 
+	{
+		ASTNeg val1 = (ASTNeg)accept(node, new ASTNeg(0));
+		
+		Node child = val1.jjtGetChild(0);
+		if (child instanceof ASTConstant)
+		{
+			ASTConstant c = (ASTConstant)child;
+			c.setValue(Float.toString(-c.getValue()));
+			return c;			
+		}
+		else
+			return val1;
+	}
+	
+	@Override
 	public Object visit(ASTMul node, Object data)
 	{
 		ASTMul val1 = (ASTMul)accept(node, new ASTMul(0));

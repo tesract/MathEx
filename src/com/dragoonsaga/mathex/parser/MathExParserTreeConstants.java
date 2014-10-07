@@ -7,11 +7,12 @@ public interface MathExParserTreeConstants
   public int JJTADD = 1;
   public int JJTSUB = 2;
   public int JJTMUL = 3;
-  public int JJTDIV = 4;
-  public int JJTEXP = 5;
-  public int JJTVOID = 6;
-  public int JJTCONSTANT = 7;
-  public int JJTVARIABLE = 8;
+  public int JJTNEG = 4;
+  public int JJTDIV = 5;
+  public int JJTEXP = 6;
+  public int JJTVOID = 7;
+  public int JJTCONSTANT = 8;
+  public int JJTVARIABLE = 9;
 
 
   public String[] jjtNodeName = {
@@ -19,6 +20,7 @@ public interface MathExParserTreeConstants
     "Add",
     "Sub",
     "Mul",
+    "Neg",
     "Div",
     "Exp",
     "void",
@@ -26,4 +28,4 @@ public interface MathExParserTreeConstants
     "Variable",
   };
 }
-/* JavaCC - OriginalChecksum=29558e2e45fb70a512c47e37e52d3e45 (do not edit this line) */
+/* JavaCC - OriginalChecksum=030069464f67b5ab3a18193754208fcf (do not edit this line) */

@@ -45,6 +45,14 @@ public class ReversePolishVisitor implements MathExParserVisitor
 	}
 	
 	@Override
+	public Object visit(ASTNeg node, Object data) 
+	{
+		String val = (String)node.jjtGetChild(0).jjtAccept(this, data);
+		
+		return "-" + val;
+	}
+	
+	@Override
 	public Object visit(ASTMul node, Object data)
 	{
 		String val = (String)node.jjtGetChild(0).jjtAccept(this, data);

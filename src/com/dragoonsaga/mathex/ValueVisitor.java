@@ -43,6 +43,14 @@ public class ValueVisitor implements MathExParserVisitor
 	}
 	
 	@Override
+	public Object visit(ASTNeg node, Object data) 
+	{
+		float ret=(Float)node.jjtGetChild(0).jjtAccept(this, data);;
+		
+		return -ret;
+	}
+	
+	@Override
 	public Object visit(ASTMul node, Object data)
 	{
 		float ret=(Float)node.jjtGetChild(0).jjtAccept(this, data);;
