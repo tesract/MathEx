@@ -7,7 +7,7 @@ Introduction
 
 MathEx defines mathematical expression language using JJTree (https://javacc.java.net/doc/JJTree.html) to define a parser.
 
-Probably the best introduction is to look at https://github.com/tesract/MathEx/blob/master/src/MathExTest.java  which has several tests which also serve as examples.
+Probably the best introduction is to look at https://github.com/tesract/MathEx/blob/master/src/test/java/MathExTest.java  which has several tests which also serve as examples.
 
 Building
 --------
@@ -16,7 +16,7 @@ To build from source run these commands:
 
 	git clone http://github.com/tesract/MathEx
 	cd MathEx
-	make jar
+	gradle jar
 
 After that you should have a MathEx.jar file sitting in the MathEx folder which is ready to use.
 
@@ -42,6 +42,3 @@ Future Plans
 Finish the DeriveVisitor implementation so it can handle polynomial expressions with out resorting to value based deravites.
 
 Add functionality to find the zero's of a function.
-
-Switch to ant based build.
-
