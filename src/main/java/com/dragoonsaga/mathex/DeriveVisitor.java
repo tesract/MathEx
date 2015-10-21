@@ -1,121 +1,126 @@
 package com.dragoonsaga.mathex;
 
-import com.dragoonsaga.mathex.parser.*;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-public class DeriveVisitor implements MathExParserVisitor
-{
-	public DeriveVisitor() { }
-	
-	private Node accept(Node node, Node ret, String val)
-	{
-		for(int i=0; i<node.jjtGetNumChildren(); i++)
-		{
-			SimpleNode sn = (SimpleNode)node.jjtGetChild(i).jjtAccept(this, val);
-			
-			if (sn!=null)
-				ret.jjtAddChild(sn, i);
+import com.dragoonsaga.mathex.parser.Node;
+import com.dragoonsaga.mathex.parser.NodeAdd;
+import com.dragoonsaga.mathex.parser.NodeConstant;
+import com.dragoonsaga.mathex.parser.NodeDerivitave;
+import com.dragoonsaga.mathex.parser.NodeDiv;
+import com.dragoonsaga.mathex.parser.NodeExp;
+import com.dragoonsaga.mathex.parser.NodeMul;
+import com.dragoonsaga.mathex.parser.NodeNeg;
+import com.dragoonsaga.mathex.parser.NodeRoot;
+import com.dragoonsaga.mathex.parser.NodeSub;
+import com.dragoonsaga.mathex.parser.NodeVariable;
+import com.dragoonsaga.mathex.parser.ParserVisitor;
+
+/**
+ * Visitor to generate derivative tree
+ * 
+ * @author Eric Brooks
+ *
+ */
+public class DeriveVisitor implements ParserVisitor {
+
+	private Node accept(Node node, Node ret, String val) {
+		for (int i = 0; i < node.numChildren(); i++) {
+			Node sn = (Node) node.getChild(i).accept(this, val);
+
+			if (sn != null)
+				ret.addChild(sn, i);
 		}
-		
-		if (ret.jjtGetNumChildren()>0)
+
+		if (ret.numChildren() > 0)
 			return ret;
-		
+
 		return null;
 	}
-	
-	@Override
-	public Object visit(ASTStart node, Object data)
-	{
-		//return accept(node, new ASTStart(0), (String)data);
-		
-		return new DerivitaveNode(node, (String)data);
-	}	
 
 	@Override
-	public Object visit(ASTAdd node, Object data)
-	{
-		ASTAdd val1 = (ASTAdd)accept(node, new ASTAdd(0), (String)data);
-		
-		if (val1.jjtGetNumChildren()>1)
+	public Object visit(NodeRoot node, Object data) {
+		// return accept(node, new ASTStart(0), (String)data);
+
+		return node.getParser().createDerivitaveNode(node, (String) data);
+	}
+
+	@Override
+	public Object visit(NodeAdd node, Object data) {
+		NodeAdd val1 = (NodeAdd) accept(node, node.getParser().createNodeAdd(),
+				(String) data);
+
+		if (val1.numChildren() > 1)
 			return val1;
 		else
-			return val1.jjtGetChild(0);
+			return val1.getChild(0);
 	}
-	
+
 	@Override
-	public Object visit(ASTSub node, Object data)
-	{
-		ASTSub val1 = (ASTSub)accept(node, new ASTSub(0), (String)data);
-		
-		if (val1.jjtGetNumChildren()>1)
+	public Object visit(NodeSub node, Object data) {
+		NodeSub val1 = (NodeSub) accept(node, node.getParser().createNodeSub(),
+				(String) data);
+
+		if (val1.numChildren() > 1)
 			return val1;
 		else
-			return val1.jjtGetChild(0);
+			return val1.getChild(0);
 	}
-	
+
 	@Override
-	public Object visit(ASTNeg node, Object data) 
-	{
-		ASTNeg val1 = (ASTNeg)accept(node, new ASTNeg(0), (String)data);
-		
+	public Object visit(NodeNeg node, Object data) {
+		NodeNeg val1 = (NodeNeg) accept(node, node.getParser().createNodeNeg(),
+				(String) data);
+
 		return val1;
 	}
-	
+
 	@Override
-	public Object visit(ASTMul node, Object data)
-	{
-		ASTMul val1 = (ASTMul)accept(node, new ASTMul(0), (String)data);
-		
-		if (val1.jjtGetNumChildren()>1)
+	public Object visit(NodeMul node, Object data) {
+		NodeMul val1 = (NodeMul) accept(node, node.getParser().createNodeMul(),
+				(String) data);
+
+		if (val1.numChildren() > 1)
 			return val1;
 		else
-			return val1.jjtGetChild(0);
+			return val1.getChild(0);
 	}
-	
+
 	@Override
-	public Object visit(ASTDiv node, Object data)
-	{
-		ASTDiv val1 = (ASTDiv)accept(node, new ASTDiv(0), (String)data);
-		
-		if (val1.jjtGetNumChildren()>1)
+	public Object visit(NodeDiv node, Object data) {
+		NodeDiv val1 = (NodeDiv) accept(node, node.getParser().createNodeDiv(),
+				(String) data);
+
+		if (val1.numChildren() > 1)
 			return val1;
 		else
-			return val1.jjtGetChild(0);
+			return val1.getChild(0);
 	}
-	
+
 	@Override
-	public Object visit(ASTExp node, Object data)
-	{
-		ASTExp val1 = (ASTExp)accept(node, new ASTExp(0), (String)data);
-		
-		if (val1.jjtGetNumChildren()>1)
-		{
-			
+	public Object visit(NodeExp node, Object data) {
+		NodeExp val1 = (NodeExp) accept(node, node.getParser().createNodeExp(),
+				(String) data);
+
+		if (val1.numChildren() > 1) {
+
 			return val1;
-		}
-		else
-			return val1.jjtGetChild(0);
+		} else
+			return val1.getChild(0);
 	}
-	
+
 	@Override
-	public Object visit(ASTConstant node, Object data)
-	{
+	public Object visit(NodeConstant node, Object data) {
 		return node;
 	}
 
 	@Override
-	public Object visit(ASTVariable node, Object data)
-	{
+	public Object visit(NodeVariable node, Object data) {
 		return node;
-	}
-	
-	//@Override
-	public Object visit(DerivitaveNode node, Object data) {
-		return null;
 	}
 
 	@Override
-	public Object visit(SimpleNode node, Object data)
-	{
-		return null;
+	public Object visit(NodeDerivitave node, Object data) {
+		throw new NotImplementedException();
 	}
+
 }

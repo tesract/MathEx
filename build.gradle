@@ -1,8 +1,9 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'antlr'
 
-sourceCompatibility = 1.6
-targetCompatibility = 1.6
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
 
 version = '1.0'
 
@@ -14,6 +15,9 @@ dependencies {
 	compile('commons-cli:commons-cli:1.2')
 	
 	compile('args4j:args4j:2.32')
+	
+	compile('org.antlr:antlr4-runtime:4+');	
+	antlr "org.antlr:antlr4:4+"
 	
 	testCompile('org.mockito:mockito-core:1.9.5')
 	testCompile('junit:junit:4.+')
